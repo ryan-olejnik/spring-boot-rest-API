@@ -1,6 +1,8 @@
 package com.somegroup.dao;
 
 import com.somegroup.model.Person;
+
+import java.util.List;
 import java.util.UUID;
 
 // Dao = Data access Object
@@ -11,4 +13,8 @@ public interface PersonDao {
           UUID id = UUID.randomUUID();
           return insertPerson(id, person);
       }
+
+      List<Person> getAllPersons();
+
+
 }

@@ -3,9 +3,9 @@ package com.somegroup.api;
 import com.somegroup.model.Person;
 import com.somegroup.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("api/v1/person")
 @RestController
@@ -18,8 +18,13 @@ public class PersonController {
     }
 
     @PostMapping
-    public void addPerson(Person person) {
+    public void addPerson(@RequestBody Person person) {
         personService.addPerson(person);
+    }
+
+    @GetMapping
+    public List<Person> getAllPersons() {
+        return personService.getAllPersons();
     }
 }
 

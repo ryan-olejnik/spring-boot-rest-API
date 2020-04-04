@@ -13,9 +13,11 @@ public class FakePersonDataAccessService implements PersonDao {
 
     @Override
     public int insertPerson(UUID id, Person person) {
-        System.out.println("Got a new Person!!!");
-
         DB.add(new Person(id, person.getName()));
         return 1;
+    }
+
+    public List<Person> getAllPersons() {
+        return DB;
     }
 }

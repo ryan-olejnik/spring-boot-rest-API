@@ -1,8 +1,6 @@
 package com.somegroup.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-
 import java.util.UUID;
 
 public class Person {

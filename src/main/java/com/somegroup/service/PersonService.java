@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Service
 public class PersonService {
     final private PersonDao personDao;
@@ -19,6 +21,10 @@ public class PersonService {
 
     public int addPerson(@RequestBody Person person) {
         return personDao.insertPerson(person);
+    }
+
+    public List<Person> getAllPersons() {
+        return personDao.getAllPersons();
     }
 }
 
