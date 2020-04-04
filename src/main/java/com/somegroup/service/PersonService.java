@@ -18,7 +18,6 @@ public class PersonService {
         this.personDao = personDao;
     }
 
-
     public int addPerson(@RequestBody Person person) {
         return personDao.insertPerson(person);
     }
