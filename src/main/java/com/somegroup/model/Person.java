@@ -22,11 +22,11 @@ public class Person {
     }
 
     public UUID getId() {
-        return id; // this.id?
+        return id;
     }
 
     public String getName() {
-        return name; // this.name ??
+        return name;
     }
 
     public int getAge() {

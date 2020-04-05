@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PersonService {
@@ -18,12 +20,20 @@ public class PersonService {
         this.personDao = personDao;
     }
 
-    public int addPerson(@RequestBody Person person) {
+    public Person addPerson(@RequestBody Person person) {
         return personDao.insertPerson(person);
     }
 
     public List<Person> getAllPersons() {
         return personDao.getAllPersons();
+    }
+
+    public Optional<Person> getPersonById(UUID id) {
+        return personDao.getPersonById(id);
+    }
+
+    public boolean deletePersonById(UUID id) {
+        return personDao.deletePersonById(id);
     }
 }
 

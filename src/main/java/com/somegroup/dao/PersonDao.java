@@ -3,18 +3,21 @@ package com.somegroup.dao;
 import com.somegroup.model.Person;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 // Dao = Data access Object
 public interface PersonDao {
-      int insertPerson(UUID id, Person person);
+      Person insertPerson(UUID id, Person person);
 
-      default int insertPerson(Person person) {
+      default Person insertPerson(Person person) {
           UUID id = UUID.randomUUID();
           return insertPerson(id, person);
       }
 
       List<Person> getAllPersons();
 
+      Optional<Person> getPersonById(UUID id);
 
+      boolean deletePersonById(UUID id);
 }
