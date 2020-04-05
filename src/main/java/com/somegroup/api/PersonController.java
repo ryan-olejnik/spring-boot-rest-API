@@ -33,15 +33,28 @@ public class PersonController {
 
     @GetMapping(path = "{id}")
     public Optional<Person> getPersonById(@PathVariable("id") UUID id) {
-        Optional<Person> person = personService.getPersonById(id);
-        if (person.isPresent()) {
-            return person;
+        Optional<Person> maybePerson = personService.getPersonById(id);
+        if (maybePerson.isPresent()) {
+            return maybePerson;
         } else {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Person not found"
             );
         }
     }
+
+    @PutMapping(path = "{id}")
+    public Optional<Person> updatePerson(@PathVariable("id") UUID id, @RequestBody Person updatedPerson) {
+        Optional<Person> maybeUpdatedPerson = personService.updatePerson(id, updatedPerson);
+        if (maybeUpdatedPerson.isPresent()) {
+            return maybeUpdatedPerson;
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Person not found"
+            );
+        }
+    }
+
 
     @DeleteMapping(path = "{id}")
     public boolean deletePerson(@PathVariable("id") UUID id) {

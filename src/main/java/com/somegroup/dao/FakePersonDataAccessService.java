@@ -38,13 +38,26 @@ public class FakePersonDataAccessService implements PersonDao {
     }
 
     @Override
+    public Optional<Person> updatePerson(UUID id, Person updatedPerson) {
+        Optional<Person> maybePerson = getPersonById(id);
+
+        if (maybePerson.isEmpty()) {
+            return maybePerson;
+        }
+
+        DB.set(DB.indexOf(maybePerson.get()), updatedPerson);
+
+        return Optional.of(updatedPerson);
+    }
+
+    @Override
     public boolean deletePersonById(UUID id) {
-        Optional<Person> foundPerson = getPersonById(id);
-        if (foundPerson.isEmpty()) {
+        Optional<Person> maybePerson = getPersonById(id);
+        if (maybePerson.isEmpty()) {
             return false;
         }
-        DB.remove(foundPerson.get());
-        return foundPerson.isPresent();
+        DB.remove(maybePerson.get());
+        return maybePerson.isPresent();
 
     }
 }
