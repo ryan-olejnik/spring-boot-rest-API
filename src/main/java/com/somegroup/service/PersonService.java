@@ -28,11 +28,11 @@ public class PersonService {
         return personDao.getAllPersons();
     }
 
-    public Optional<Person> getPersonById(UUID id) {
+    public Person getPersonById(UUID id) {
         return personDao.getPersonById(id);
     }
 
-    public Optional<Person> updatePerson(UUID id, Person updatedPerson) {
+    public Person updatePerson(UUID id, Person updatedPerson) {
         return personDao.updatePerson(id, updatedPerson);
     }
 

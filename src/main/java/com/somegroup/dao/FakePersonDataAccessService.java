@@ -13,9 +13,10 @@ public class FakePersonDataAccessService implements PersonDao {
     private List<Person> DB = new ArrayList<Person>();
 
     @Override
-    public Person insertPerson(UUID id, Person person) {
+    public Person insertPerson(Person person) {
+
         Person newPerson = new Person(
-                id,
+                UUID.randomUUID(),
                 person.getName(),
                 person.getAge(),
                 person.getSex()
@@ -30,34 +31,36 @@ public class FakePersonDataAccessService implements PersonDao {
     }
 
     @Override
-    public Optional<Person> getPersonById(UUID id){
-        return DB.stream()
-                .filter(person -> person.getId().equals(id))
-                .findFirst();
+    public Person getPersonById(UUID id){
+//        return DB.stream()
+//                .filter(person -> person.getId().equals(id))
+//                .findFirst();
+        return null;
 
     }
 
     @Override
-    public Optional<Person> updatePerson(UUID id, Person updatedPerson) {
-        Optional<Person> maybePerson = getPersonById(id);
-
-        if (maybePerson.isEmpty()) {
-            return maybePerson;
-        }
-
-        DB.set(DB.indexOf(maybePerson.get()), updatedPerson);
-
-        return Optional.of(updatedPerson);
+    public Person updatePerson(UUID id, Person updatedPerson) {
+//        Optional<Person> maybePerson = getPersonById(id);
+//
+//        if (maybePerson.isEmpty()) {
+//            return maybePerson;
+//        }
+//
+//        DB.set(DB.indexOf(maybePerson.get()), updatedPerson);
+//
+//        return Optional.of(updatedPerson);
+        return null;
     }
 
     @Override
     public boolean deletePersonById(UUID id) {
-        Optional<Person> maybePerson = getPersonById(id);
-        if (maybePerson.isEmpty()) {
-            return false;
-        }
-        DB.remove(maybePerson.get());
-        return maybePerson.isPresent();
-
+//        Optional<Person> maybePerson = getPersonById(id);
+//        if (maybePerson.isEmpty()) {
+//            return false;
+//        }
+//        DB.remove(maybePerson.get());
+//        return maybePerson.isPresent();
+        return true;
     }
 }

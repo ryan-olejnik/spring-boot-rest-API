@@ -24,7 +24,7 @@ public class Person {
             @JsonProperty("age") int age,
             @JsonProperty("sex") char sex
     ) {
-        this.id = id;
+        this.id = id == null ? UUID.randomUUID() : id;
         this.name = name;
         this.age = age;
         this.sex = sex;

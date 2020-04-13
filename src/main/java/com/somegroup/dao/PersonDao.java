@@ -8,18 +8,13 @@ import java.util.UUID;
 
 // Dao = Data access Object
 public interface PersonDao {
-      Person insertPerson(UUID id, Person person);
-
-      default Person insertPerson(Person person) {
-          UUID id = UUID.randomUUID();
-          return insertPerson(id, person);
-      }
+      Person insertPerson(Person person);
 
       List<Person> getAllPersons();
 
-      Optional<Person> getPersonById(UUID id);
+      Person getPersonById(UUID id);
 
-      Optional<Person> updatePerson(UUID id, Person updatedPerson);
+      Person updatePerson(UUID id, Person updatedPerson);
 
       boolean deletePersonById(UUID id);
 

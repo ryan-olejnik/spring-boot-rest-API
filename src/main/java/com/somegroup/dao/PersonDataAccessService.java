@@ -20,22 +20,37 @@ public class PersonDataAccessService implements PersonDao {
     }
 
     @Override
-    public Person insertPerson(UUID id, Person person) {
-        return null;
-    }
-
-    @Override
     public Person insertPerson(Person person) {
-        return null;
+        String sql = "INSERT INTO spring_tutorial.Person (id, name, age, sex) " +
+                "VALUES (UUID_TO_BIN(?), ?, ?, ?);";
+        Integer response = this.jdbcTemplate.update(
+                sql,
+                person.getId().toString(),
+                person.getName(),
+                person.getAge(),
+                String.valueOf(person.getSex())
+        );
+
+        if (response == 1){
+            return person;
+        } else {
+            return null;
+        }
     }
 
     @Override
     public List<Person> getAllPersons() {
-        List<Person> allPeople = this.jdbcTemplate.query(
-                "SELECT * FROM PERSON;",
+        String sql = "select " +
+                "BIN_TO_UUID(id) as id, " +
+                "name, " +
+                "age, " +
+                "sex " +
+                "from Person;";
+        List<Person> queryResults = this.jdbcTemplate.query(
+                sql,
                 ((resultSet, i) -> {
                     return new Person(
-                            UUID.randomUUID(),
+                            UUID.fromString(resultSet.getString("id")),
                             resultSet.getString("name"),
                             resultSet.getInt("age"),
                             resultSet.getString("sex").charAt(0)
@@ -43,17 +58,34 @@ public class PersonDataAccessService implements PersonDao {
                 })
         );
 
-        return allPeople;
+        return queryResults;
     }
 
     @Override
-    public Optional<Person> getPersonById(UUID id) {
-        return Optional.empty();
+    public Person getPersonById(UUID id) {
+        String sql = "select BIN_TO_UUID(id) as id, name, age, sex " +
+                "from Person " +
+                "where id = UUID_TO_BIN(?);";
+
+        List<Person> queryResults = this.jdbcTemplate.query(
+                sql,
+                new Object[]{id.toString()}, // why this???
+                ((resultSet, i) -> {
+                    return new Person(
+                            UUID.fromString(resultSet.getString("id")),
+                            resultSet.getString("name"),
+                            resultSet.getInt("age"),
+                            resultSet.getString("sex").charAt(0)
+                    );
+                })
+        );
+
+        return queryResults.size() == 1 ? queryResults.get(0) : null;
     }
 
     @Override
-    public Optional<Person> updatePerson(UUID id, Person updatedPerson) {
-        return Optional.empty();
+    public Person updatePerson(UUID id, Person updatedPerson) {
+        return null;
     }
 
     @Override
